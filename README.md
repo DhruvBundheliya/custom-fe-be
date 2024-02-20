@@ -35,6 +35,21 @@ To run the backend server, follow these steps:
 2. Install dependencies for the backend using pip install flask
 3. Start the backend server using python app.py.
 
+
+## Building and Serving the Static Content
+To build the static content for production and serve it using serve, follow these steps:
+
+1. Navigate to the frontend directory.
+2. Install dependencies for the frontend using `npm install`.
+3. Build the static content using `npm run build`.
+4. Serve the static content using serve:
+```
+npm install -g serve
+serve -s build
+```
+
+This will start a server hosting the static content from the build directory. 
+
 ### Contributing
 Feel free to contribute to this project by submitting pull requests.
 
