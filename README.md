@@ -1,14 +1,14 @@
-# My Frontend Application
+# Application
 
-This is a frontend application for interacting with a two-tier application.
+This is a two-tier application.
 
 ## Getting Started
 
 To get started with this project, follow these steps:
 
 1. Clone the repository.
-2. Install dependencies for the frontend using `npm install`.
-3. Start the development server for the frontend using `npm start`.
+2. Install dependencies for the front end using `npm install`.
+3. Start the development server for the front end using `npm start`.
 4. Make sure the backend server is running (see instructions below).
 
 ## Usage
@@ -40,7 +40,7 @@ To run the backend server, follow these steps:
 To build the static content for production and serve it using serve, follow these steps:
 
 1. Navigate to the frontend directory.
-2. Install dependencies for the frontend using `npm install`.
+2. Install dependencies for the front end using `npm install`.
 3. Build the static content using `npm run build`.
 4. Serve the static content using serve:
 ```
