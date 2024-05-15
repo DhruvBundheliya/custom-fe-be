@@ -13,7 +13,7 @@ function App() {
   const handleClick = async () => {
     setLoading(true); // Set loading state to true while request is being made
     try {
-      const res = await axios.get(`${backendUrl}/api/request`);
+      const res = await axios.get(`${backendUrl}/api/getQuote`);
       setResponse(res.data);
     } catch (error) {
       console.error(error);
@@ -25,11 +25,11 @@ function App() {
 
   return (
     <div className="container">
-      <h1 className="heading">Welcome to the Two-Tier Application</h1>
+      <h1 className="heading">You are viewing the frontend.</h1>
       <div className="content">
-        <p className="info">You are viewing the frontend.</p>
+        <p className="info">Need a smile? Click here for a quick mood lifter!</p>
         <button className="button" onClick={handleClick} disabled={loading}>
-          {loading ? 'Loading...' : 'Send Request'}
+          {loading ? 'Loading...' : 'Click'}
         </button>
         {response && <p className="response">{response}</p>}
       </div>

@@ -1,17 +1,23 @@
 from flask import Flask
 from flask_cors import CORS
+import requests
 
 app = Flask(__name__)
-CORS(app)  # This will enable CORS for all routes
+CORS(app)
 
 @app.route('/')
 def index():
-    return 'Backend: You are viewing the backend.'
+    return 'Service is Healthy'
 
-@app.route('/api/request', methods=['GET'])
+@app.route('/api/getQuote', methods=['GET'])
 def send_request():
-    # You can add any necessary logic here
-    return '200 OK'
+    joke = get_joke()
+    return joke
+
+def get_joke():
+    response = requests.get("https://sv443.net/jokeapi/v2/joke/Programming?type=single")
+    joke = response.json()
+    return joke['joke']
 
 if __name__ == '__main__':
     app.run(debug=True)
