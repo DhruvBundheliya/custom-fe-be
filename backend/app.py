@@ -9,7 +9,7 @@ CORS(app)
 def index():
     return 'Service is Healthy'
 
-@app.route('/api/getQuote', methods=['GET'])
+@app.route('/api/getJoke', methods=['GET'])
 def send_request():
     joke = get_joke()
     return joke
