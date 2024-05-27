@@ -6,6 +6,7 @@ This is a two-tier application.
 
 To get started with this project, follow these steps:
 
+
 1. Clone the repository.
 2. Install dependencies for the front end using `npm install`.
 3. Start the development server for the front end using `npm start`.
@@ -31,9 +32,11 @@ Update the backendUrl value to match the URL of your backend server.
 ## Running the Backend
 To run the backend server, follow these steps:
 
+pre-requisites: `python 3.11`
+
 1. Navigate to the backend directory.
-2. Install dependencies for the backend using pip install flask
-3. Start the backend server using python app.py.
+2. Install dependencies for the backend using `pip install requirements.txt`.
+3. Start the backend server on development using `python app.py`.
 
 
 ## Building and Serving the Static Content
