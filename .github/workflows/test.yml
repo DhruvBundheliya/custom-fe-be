@@ -9,9 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-  changes:
-    needs: checkout
-    runs-on: ubuntu-latest
-    steps:
+  # changes:
+  #   needs: checkout
+  #   runs-on: ubuntu-latest
+  #   steps:
       - run: cat README.md
       - run: pwd
+      - run: ls -al
