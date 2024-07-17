@@ -35,7 +35,7 @@ To run the backend server, follow these steps:
 pre-requisites: `python 3.11`
 
 1. Navigate to the backend directory.
-2. Install dependencies for the backend using `pip install requirements.txt`.
+2. Install dependencies for the backend using `pip install -r requirements.txt`.
 3. Start the backend server on development using `python app.py`.
 
 
