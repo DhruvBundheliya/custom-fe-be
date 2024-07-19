@@ -9,10 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-  # changes:
-  #   needs: checkout
-  #   runs-on: ubuntu-latest
-  #   steps:
-      - run: cat README.md
-      - run: pwd
-      - run: ls -al
+      - name: ArgoCD API Action
+        uses: MayurDuduka/argocd-api@v1.0
+        with:
+          argocd_server: ${{ secrets.ARGOCD_SERVER }}
+          argocd_username: ${{ secrets.ARGOCD_USERNAME }}
+          argocd_password: ${{ secrets.ARGOCD_PASSWORD }}
+          argocd_app_names: 'external-secrets'
+          refresh_app: 'true'
+          sync_app: 'true'
