@@ -15,6 +15,6 @@ jobs:
           argocd_server: ${{ secrets.ARGOCD_SERVER }}
           argocd_username: ${{ secrets.ARGOCD_USERNAME }}
           argocd_password: ${{ secrets.ARGOCD_PASSWORD }}
-          argocd_app_names: 'external-secrets'
+          argocd_app_names: "'external-secrets'"
           refresh_app: 'true'
           sync_app: 'true'
