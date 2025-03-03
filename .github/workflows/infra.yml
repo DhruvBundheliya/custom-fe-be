@@ -1,0 +1,111 @@
+name: Node js app deploy to EKS
+on:
+  push:
+    branches: [ "main" ]
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+    
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: latest
+    - name: Terraform Init
+      run: terraform init 
+    - name: Terraform Plan
+      run: terraform plan
+    - name: terraform apply
+      # run: terraform apply -auto-approve
+      run: terraform destroy --auto-approve
+      
+    
+
+
+    - name: Setup EKS Kubectl
+      uses: zachguo/setup-eks-kubectl@v1
+      with:
+        cluster: my-cluster 
+        region: us-east-1
+
+
+
+
+    # - name: Update kube config
+    #   run: aws eks update-kubeconfig --name my-cluster --region us-east-1
+
+    # - name: installing eksctl
+    #   run:
+    #      |
+    #      ARCH=amd64
+    #      PLATFORM=$(uname -s)_$ARCH
+    #      curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+
+    #      tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+
+    #      sudo mv /tmp/eksctl /usr/local/bin
+
+    # - name: install oidc
+    #   run: eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=my-cluster --approve
+
+    # - name: Installing the AWS Load Balancer
+    #   run: |
+    #    curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json \
+       
+    #    aws iam create-policy \
+    #      --policy-name AWSLoadBalancerControllerIAMPolicy \
+    #      --policy-document file://iam_policy.json  
+  
+    # - name: Creating load Balancer Controller service account and roles
+    #   run: |
+    #     eksctl create iamserviceaccount \
+    #     --cluster=my-cluster \
+    #     --namespace=kube-system \
+    #     --name=aws-load-balancer-controller \
+    #     --role-name AmazonEKSLoadBalancerControllerRole \
+    #     --attach-policy-arn=arn:aws:iam::381492217945:policy/AWSLoadBalancerControllerIAMPolicy \
+    #     --override-existing-serviceaccounts \
+    #     --approve
+
+    # - name: Installing helm
+    #   run: |
+    #     curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null \
+    #     sudo apt-get install apt-transport-https  \
+    #     sudo apt-get update \
+    #     sudo apt-get install helm 
+        
+
+
+    # - name:  Install aws-load-balancer-controller eks
+    #   run: |
+    #      helm repo add eks https://aws.github.io/eks-charts
+    #      helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+    #        -n kube-system \
+    #        --set clusterName=my-cluster \
+    #         --set serviceAccount.create=false \
+    #         --set serviceAccount.name=aws-load-balancer-controller \
+    #        --set region=us-east-1 \
+    #         --set vpcId=vpc-09cbc7679da1d06a0 \
+    #         --set image.repository=602401143452.dkr.ecr.us-east-2.amazonaws.com/amazon/aws-load-balancer-controller
+
+    # - name: Sleep for 30 seconds
+    #   run: sleep 30s
+    #   shell: bash
+
+    # - name: Deploy to EKS
+    #   run: |
+    #      # kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/high-availability-1.21+.yaml
+
+    #        kubectl get pods -n kube-system
+
